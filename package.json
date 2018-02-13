@@ -1,0 +1,34 @@
+{
+  "name": "vue-cascade-slider",
+  "version": "0.1.0",
+  "description": "",
+  "main": "dist/vue-cascade-slider.min.js",
+  "scripts": {
+    "build": "webpack --config config/webpack.min.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com:nutnetru/vue-cascade-slider.git"
+  },
+  "keywords": [],
+  "author": "Maksim Khodyrev",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-core": "^6.21.0",
+    "babel-loader": "^6.2.10",
+    "babel-plugin-transform-runtime": "^6.15.0",
+    "babel-plugin-webpack-alias": "^2.1.2",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-stage-1": "^6.22.0",
+    "babel-preset-stage-2": "^6.18.0",
+    "babel-register": "^6.18.0",
+    "copy-webpack-plugin": "^4.0.1",
+    "css-loader": "^0.26.1",
+    "vue": "^2.1.8",
+    "vue-loader": "^10.0.2",
+    "vue-style-loader": "toddlawton/vue-style-loader",
+    "vue-template-compiler": "^2.1.8",
+    "webpack": "^1.14.0",
+    "webpack-merge": "^1.1.2"
+  }
+}
