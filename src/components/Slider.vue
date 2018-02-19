@@ -1,5 +1,5 @@
 <template>
-  <div class="carousel">
+  <div class="carousel" :style="sliderStyles" v-images-loaded="showSlider" v-cloak>
     <div class="carousel-slider">
       <slot></slot>
     </div>
@@ -9,16 +9,33 @@
 </template>
 
 <script>
-import Controls from './Controls.vue'
+import Controls from './Controls.vue';
+import imagesLoaded from 'vue-images-loaded';
 
 export default {
     components: {
       Controls
     },
+    directives: {
+        imagesLoaded
+    },
+    props: {
+        speed: {
+            type: Number
+        }
+    },
+    computed: {
+        sliderStyles() {
+            return {
+                display: this.visible ? 'block' : 'none'
+            };
+        }
+    },
     data(){
         return {
             slides: null,
             currentSlide: 1,
+            visible: false
         };
     },
     methods: {
@@ -38,6 +55,15 @@ export default {
                 slide.setIndex(newIndex);
             }
         },
+
+        getSpeed() {
+            return this.speed || 500;
+        },
+
+        showSlider() {
+            console.log(1);
+            this.visible = true;
+        }
     },
     mounted() {
         this.slides = this.$children.filter(child => {

@@ -21,6 +21,10 @@
         },
         methods: {
             goToSlide(index) {
+                if (this.$parent.currentSlide === index) {
+                    return;
+                }
+
                 let currentIndex = index;
                 for (let k in this.$parent.slides) {
                     let slide = this.$parent.slides[k];

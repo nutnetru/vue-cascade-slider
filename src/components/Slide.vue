@@ -15,43 +15,80 @@
       data() {
           return {
               parent: this.$parent,
-              idx: this.index
+              idx: this.index,
+              prevIdx: null,
+              maxVisibleSlides: 3,
+              styles: {},
           };
       },
       computed: {
           slideStyle() {
-              let padding = this.getPadding(),
-                  maxZIndex = 99,
-                  maxVisibleSlides = 3,
-                  posRight = 0,
-                  opacity = 1;
-
-              posRight = padding * (maxVisibleSlides - this.idx);
-
-              if (this.idx > maxVisibleSlides) {
-                  opacity = 0;
-              }
-
-              let styles = {
-                  top: (this.idx - 1) * padding + 'px',
-                  bottom: (this.idx - 1) * padding + 'px',
-                  right: posRight + 'px',
-                  opacity: opacity,
-                  'z-index': maxZIndex - this.idx,
-              };
-
-              styles.transition = 'right 500ms, top 500ms, bottom 500ms, z-index 0ms, opacity 150ms';
-
-              return styles;
+              return this.styles;
           }
       },
+
+      created() {
+          this.animate(this.index);
+      },
+
       methods: {
           gotoSlide() {
-            this.parent.goToSlide(this.idx);
+              if (this.index === this.parent.currentSlide) {
+                  return;
+              }
+
+              this.parent.goToSlide(this.idx);
           },
 
           setIndex(index) {
+              let ctx = this;
+
+              this.prevIdx = this.idx;
+
+              if (this.prevIdx === 1 || index > this.prevIdx) {
+                  this.moveToStartPosition();
+              }
+
               this.idx = index;
+              setTimeout(function () {
+                  ctx.animate(index);
+              }, 30);
+          },
+
+          animate(index) {
+              let styles = this.calculateStyles(index),
+                  speed = this.$parent.getSpeed();
+
+              styles.transition = 'right ' + speed + 'ms ease-out,' +
+                  'top ' + speed + 'ms ease-out,' +
+                  'bottom ' + speed + 'ms ease-out';
+
+              this.styles = styles;
+          },
+
+          moveToStartPosition() {
+              this.styles = this.calculateStyles(this.maxVisibleSlides + 1);
+          },
+
+          calculateStyles(forIndex) {
+              let padding = this.getPadding(),
+                  maxZIndex = 99,
+                  posRight = 0,
+                  opacity = 1;
+
+              posRight = padding * (this.maxVisibleSlides - forIndex);
+
+              if (forIndex > this.maxVisibleSlides) {
+                  opacity = 0;
+              }
+
+              return {
+                  top: (forIndex - 1) * padding + 'px',
+                  bottom: (forIndex - 1) * padding + 'px',
+                  right: posRight + 'px',
+                  opacity: opacity,
+                  'z-index': maxZIndex - forIndex,
+              };
           },
 
           onSwipeLeft() {
