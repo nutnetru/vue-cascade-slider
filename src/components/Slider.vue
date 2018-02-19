@@ -61,7 +61,6 @@ export default {
         },
 
         showSlider() {
-            console.log(1);
             this.visible = true;
         }
     },
