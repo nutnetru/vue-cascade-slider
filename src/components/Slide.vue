@@ -114,11 +114,11 @@
           getPadding() {
               let width = window.innerWidth;
 
-              if (width < 768) {
+              if (width < 578) {
                   return 10;
               }
 
-              if (width < 1200) {
+              if (width < 992) {
                   return 20;
               }
 
