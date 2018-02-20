@@ -27,8 +27,14 @@
           }
       },
 
-      created() {
+      mounted() {
+          let ctx = this;
+
           this.animate(this.index);
+
+          window.addEventListener('resize', () => {
+              ctx.animate(ctx.index)
+          });
       },
 
       methods: {
