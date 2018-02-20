@@ -1,6 +1,6 @@
 {
   "name": "vue-cascade-slider",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "",
   "main": "dist/vue-cascade-slider.min.js",
   "scripts": {

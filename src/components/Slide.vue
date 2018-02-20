@@ -94,6 +94,7 @@
                   right: posRight + 'px',
                   opacity: opacity,
                   'z-index': maxZIndex - forIndex,
+                  display: forIndex > this.maxVisibleSlides ? 'none' : 'flex'
               };
           },
 
